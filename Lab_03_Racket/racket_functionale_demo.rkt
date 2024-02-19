@@ -1,0 +1,85 @@
+#lang racket
+
+; FUNCTII CURRY/UNCURRY
+; FUNCTIE UNCURRY - functie care isi primeste toti parametrii deodata
+; (cu ce am lucrat pana acum)
+
+(define add-uncurry
+  (lambda (x y)
+    (+ x y)))
+
+; APELARE:
+; (add-uncurry 1 2) - functia add-uncurry primeste 2 argumente
+
+; FUNCTII CURRY - functie aplicata 'partial' pe un numar mai mic de
+; parametrii decat este necesar
+
+(define add-curry
+  (lambda (x)
+    (lambda (y)
+      (+ x y))))
+
+; APELARE:
+; (add-curry 1 2) - eroare, functia add-curry primeste un argument
+; si returneaza o functie
+; ((add-curry 1) 2) - modul corect de apelare
+
+; TRANSFORMARE CURRY -> UNCURRY
+
+(define convert-add-curry
+  (lambda (x y)
+    ((add-curry x) y)))
+
+; APELARE:
+; (convert-add-curry 1 2) - functie primeste 2 argumente conform antetului
+
+; TRANSFORMARE UNCURRY -> CURRY
+
+(define convert-add-uncurry
+  (lambda (x)
+    (lambda (y)
+      (add-uncurry x y))))
+
+; REUTILIZARE COD - FUNCTIONALE
+
+; MAP - (map f L) - aplica functia f (unara) pe toate elementele liste L
+; Obs! - daca functia f nu este unara (primeste mai multe argumente)
+; atunci va fi necesar a oferi mai multe liste
+; => antet (map f L1 L2 ...)
+
+(map add1 '(1 2 3 4))
+(map sqr '(1 2 3 4))
+(map + '(1 2 3) '(4 8 10) '(12 14 16))
+
+; FILTER - (filter p L) - verifica proprietatea p pe fiecare element al listei L
+; si il pastreaza in cazul in care p returneaza #t
+; Obs! - p trebuie sa returneze un boolean
+
+(filter even? '(1 2 3 4 5 6))
+(filter positive? '(-1 -2 -3 1 2 3))
+(filter (λ (x) (>= x 5)) '(1 2 3 4 5 6 7 8 9 10))
+
+; FOLDL - (foldl f init L) - f functie binara
+; init este un acumulator care stocheaza la fiecare pas rezultatul functiei
+; f aplicat pe init si elementul curent din L (incepand de la stanga)
+
+; Obs! - asemenator lui map poate primi mai multe liste, dar functia f trebuie
+; sa primeasca 1 (acumulatorul) + nr liste oferite argumente 
+(foldl cons null '(1 2 3 4)) ; reverse
+(foldl (lambda (x y result) (* result (+ x y))) 1 '(1 3 5) '(2 4 6))
+
+; FOLDR - (foldr f init L) - f functie binara
+; similar foldl doar ca se porneste cu ultimul element
+
+(foldr cons null '(1 2 3 4)) ; copiaza lista
+(foldr (lambda (x acc) (cons (* x 2) acc)) '(1) '(2 3 4))
+
+; APPLY - (apply f L) - !A NU SE CONFUNDA CU MAP, este asemanator cu fold
+; acumuleaza rezultatul operatiei f pe fiecare element al listei L
+; poate primi mai multe argumente de tipuri diferite
+
+(apply - 0 1 '(2 3)) ; intoarce -6
+; 0 este acumulatorul initial
+; aplica scadere intre acumulator si elementul curent pe 1, 2, 3
+
+
