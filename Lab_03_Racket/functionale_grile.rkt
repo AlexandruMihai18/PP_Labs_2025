@@ -1,0 +1,75 @@
+#lang racket/gui
+
+; 1. Care dintre functionalele map, foldl, foldr, apply poate inlocui
+; semnul intrebarii in expresia Racket de mai jos astfel incat aceasta
+; sa se evalueze la ’((1))?
+
+; (? (lambda (x y) (y x)) (list 1) (list list))
+
+; R: map si apply
+
+(map (lambda (x y) (y x)) (list 1) (list list))
+;(foldr (lambda (x y) (y x)) (list 1) (list list))
+;(foldr (lambda (x y) (y x)) (list 1) (list list))
+(apply (lambda (x y) (y x)) (list 1) (list list))
+
+
+; 2. Care este valoare expresiei Racket de mai jos?
+((foldr compose
+        (lambda (x) x)
+        (list (curry + 1) (curry * 2)))
+ 5)
+
+; R: 11
+; Explicatie: ((λ (x) (+ x 1) . λ (x) (+ x 2) . λ (x) (x)) 5)
+; (1 + (2 * 5)) = 11
+
+
+; 3. Ce calculeaza urmatoarea expresie in Racket?
+(define mat '((1 2) (3 4)))
+(apply + (apply append mat))
+
+; R: Suma numerelor din matrice
+; Explicatie:
+; (apply append mat) -> creeaza lista elementelor din matrice
+; (apply + lista) -> suma elementelor din matrice
+
+
+; 4. Ce produce codul Racket urmator?
+(define (foo f)
+  (foldl f 1 '(1 2)))
+
+(define (bar f)
+  (foldr f 1 '(1 2)))
+
+(filter (lambda (f) (equal? (foo f) (bar f)))
+        (list + - * list))
+
+; R: (#<procedure:+> #<procedure:*>)
+; Explicatie: filtreaza functiile care determina acelasi rezultat
+; in urma aplicarii foldr si foldl din foo, respectiv bar
+; + si * sunt singurele care respecta
+
+
+; 5. Ce rezultat produce codul Racket urmator?
+(define (f a)
+  (lambda (b)
+    (lambda (g)
+      (g b a))))
+(map ((f '()) '()) (list cons append list))
+
+; R: ((()) () (() ()))
+; Explicatie: se obtine o lista care contine rezultatele urmatoarelor
+; apeluri:
+; cons '() '() -> '(())
+; append '() '() -> '()
+; list '() '() -> '(() ())
+
+; 6. In evaluare apelui Racket functia list este apelata de ...
+(apply map (cons list '((1 2 3) (a b c))))
+
+; R: 3 ori
+; Explicatie: (apply map '(list (1 2 3) (a b c)))
+; -> (map list '(1 2 3) '(a b c))
+; -> '((1 a) (2 b) (3 c))
+

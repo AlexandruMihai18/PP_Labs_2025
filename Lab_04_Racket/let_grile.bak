@@ -1,0 +1,24 @@
+#lang racket/gui
+
+; 1. Care dintre urmatoarele expresii din Racket este echivalenta cu:
+(let* ([x 10]
+       [y (lambda () (+ x 1))])
+  (y))
+
+; a
+((lambda (x)
+   ((lambda (y) (y)) (lambda () (+ x 1))))
+ 10)
+
+; b
+((lambda (x)
+   ((lambda (y) (lambda () (+ x 1))) (y)))
+ 10)
+
+; c
+((lambda (x y) (y))
+ 10 (lambda () (+ x 1)))
+
+; d
+((lambda (x y) 10 (lambda () (+ x 1)))
+ (y))
