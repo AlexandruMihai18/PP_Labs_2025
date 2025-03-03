@@ -1,1 +1,115 @@
 #lang racket
+
+; INTRODUCERE IN RACKET
+
+(max 1 2)
+; afiseaza 2, max este functie predefinita
+
+(max (+ 1 2) 2)
+; expresia se reduce la (max 3 2) si va afisa 3
+
+; (max (10) 12)
+; eroare - se incearca a se aplica functia cu numele 10
+; pe 0 parametrii
+
+(if (equal? #t #t) (max 4 5) (min 4 5))
+
+; (if (= #t #t) (max 4 5) (min 4 5))
+; eroare - operatorul egal corespunde doar variabilelor
+; numerice
+
+
+; TIPURI DE DATE
+
+;(define x #t) ; boolean
+;(define y 10) ; numeric
+;(define z 'abc) ; string
+
+; cons - creeaza pereche
+(define pereche (cons 'a 'b))
+
+; list - creeaza lista
+(define lista (list 'a 'b))
+
+(define lista2 '(1 2 3 4 5))
+
+; FUNCTII PE PERECHI SI LISTE - tipuri de date ETEROGENE
+
+; car, cdr - aplicate pe perechi/liste
+(car lista2) ; primul element
+
+(cdr lista2) ; lista fara primul element
+
+(cadr lista2) ; cdr, urmat de car - al doilea element
+
+(cddr lista2) ; cdr, urmat de cdr - lista fara primele 2 elemente
+
+; (cdar lista2) ; car, urmat de cdr
+; eroare - se incearca a se extrage restul listei pe primul element
+; primul element nu este lista
+
+; Exemplu pe care se poate aplica cdar?
+
+(cdar '((1 2) 3 4))
+
+; append - aplicat pe liste
+(append '(1 2 3) '(4) '(5 6))
+
+; null? - verifica daca o lista este goala
+(null? '())
+(null? '(1 2))
+
+; length - returneaza lungimea liste
+(length '(1 2 3 4))
+
+; reverse
+(reverse '(1 2 3))
+
+; list? - verifica daca variabila este o lista
+(list? (cons 1 2)) ; #f
+(list? '(1 2)) ;#t
+
+; FUNCTII ANONIME (LAMBDA)
+
+; lambda (Ctrl + \) + parametrii (intre paranteze) + corpul functiei
+(lambda (x) x) ; functia identitate
+
+(λ (x) x)
+
+((lambda (x y) (+ x y)) 2 3)
+
+; define + nume functie + corpul functiei
+
+(define suma (lambda (x y) (+ x y)))
+; suma este o procedura care asteapta 2 parametrii
+
+(define append2 (lambda (l1 l2) (append l1 l2)))
+
+; define + nume functie (cu parametrii) + corpul functiei
+(define (append3 l1 l2) (append l1 l2))
+
+; IF and COND
+
+; Care este varianta corecta?
+(define (is_palindrome1? l)
+  (if (eq? l (reverse l))
+      #t
+      #f))
+
+(define (is_palindrome2? l)
+  (if (equal? l (reverse l))
+      #t
+      #f))
+
+; eq? - == in Java
+; equal? - egalitate intre valori
+; a doua varianta este corecta
+
+(define (factorial n)
+  (cond
+    ((= n 0) 1)
+    ((= n 1) 1)
+    (else (* n (factorial (- n 1))))))
+
+
+

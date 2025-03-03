@@ -9,21 +9,11 @@
         [(odd? x) (f1 (- x 1))]
         [else (+ (f1 (- x 3)) (f1 (- x 4)))]))
 
-; R: 2
-; Explicatie:
-; L0 : (f 5) -> (f 4) -- tail-call optimization
-; L1 :          (+ (f 1) (f 0)), (f 1) -> (f 0)
-; L2 :          (+ (+ (f -3) (f -4)) (+ (f -3) (f -4))) --> -14
-
 
 ; 2. Tip de recursivitate? (and why?)
 (define (f2 x acc)
   (if (zero? x) acc
       (f2 (sub1 x) (add1 acc))))
-
-; R: recursivitate pe coada pentru ca nu mai realizeaza alte operatii
-; dupa aplicatia recursiva
-
 
 ; 3. Ce calculeaza functiile? Care are recursivitate mai eficienta?
 
@@ -39,9 +29,6 @@
       (let ((newf (f32 (- a 1) b)))
         (+ 1 newf))))
 
-; R: f31 si f32 calculeaza acelasi rezultat, dar f1 are o recursivitate
-; mai eficienta decat f2
-
 
 ; 4. Cum arata procesul generat de apelul (par? 10) in Racket?
 (define (par? x)
@@ -51,9 +38,6 @@
 (define (impar? x)
   (and (> x 0)
        (par? (- x 1))))
-
-; R: Ca o iteratie - nu este necesara depunerea de informatii pe stiva.
-
 
 ; 5. Ce fel de recursivitate utilizeaza functia?
 (define (subsets set set-size subset-size current-set result)
@@ -70,9 +54,6 @@
                                 current-set
                                 result))]))
 
-; R: recursivitate pe stiva (pentru a evalua subsets de la linia 63,
-; avem nevoie de a evalua intai functia subsets la linia 67.
-
 
 ; 6. Ce afiseaza codul Racket urmator?
 (define (f L)
@@ -83,5 +64,28 @@
 (f '(1))
 (f '(1 2 3 4 5 6 7 8))
 
+; Ex 1
+; R: 2
+; Explicatie:
+; L0 : (f 5) -> (f 4) -- tail-call optimization
+; L1 :          (+ (f 1) (f 0)), (f 1) -> (f 0)
+; L2 :          (+ (+ (f -3) (f -4)) (+ (f -3) (f -4))) --> -14
+
+; Ex 2
+; R: recursivitate pe coada pentru ca nu mai realizeaza alte operatii
+; dupa aplicatia recursiva
+
+; Ex 3
+; R: f31 si f32 calculeaza acelasi rezultat, dar f1 are o recursivitate
+; mai eficienta decat f2
+
+; Ex 4
+; R: Ca o iteratie - nu este necesara depunerea de informatii pe stiva.
+
+; Ex 5
+; R: recursivitate pe stiva (pentru a evalua subsets de la linia 47,
+; avem nevoie de a evalua intai functia subsets la linia 51.
+
+; Ex 6
 ; R: 1 si eroare (pentru al doilea apel se va ajunge la (f '())
 ; care va genera eroare la evaluarea (null? (cdr L))

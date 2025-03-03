@@ -3,10 +3,10 @@
 ; INTRODUCERE IN RACKET
 
 (max 1 2)
-; afiseaza 12, max este functie predefinita
+; afiseaza 2, max este functie predefinita
 
 (max (+ 1 2) 2)
-; expresia se reduce la (max 12 10) si va afisa 12
+; expresia se reduce la (max 3 2) si va afisa 3
 
 ; (max (10) 12)
 ; eroare - se incearca a se aplica functia cu numele 10
@@ -23,7 +23,7 @@
 
 ;(define x #t) ; boolean
 ;(define y 10) ; numeric
-;(define z 'abc) ; string
+;(define z 'abc) ; literal
 
 ; cons - creeaza pereche
 (define pereche (cons 'a 'b))
@@ -74,6 +74,8 @@
 ; lambda (Ctrl + \) + parametrii (intre paranteze) + corpul functiei
 (lambda (x) x) ; functia identitate
 
+(λ (x) x)
+
 ((lambda (x y) (+ x y)) 2 3)
 
 ; define + nume functie + corpul functiei
@@ -99,6 +101,7 @@
       #t
       #f))
 
+; = - valori numerice
 ; eq? - == in Java
 ; equal? - egalitate intre valori
 ; a doua varianta este corecta
@@ -108,6 +111,3 @@
     ((= n 0) 1)
     ((= n 1) 1)
     (else (* n (factorial (- n 1))))))
-
-
-
