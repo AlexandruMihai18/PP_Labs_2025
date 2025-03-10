@@ -40,7 +40,7 @@
     (lambda (y)
       (add-uncurry x y))))
 
-; REUTILIZARE COD - FUNCTIONALE
+; REUTILIZARE COD + FUNCTIONALE
 
 ; MAP - (map f L) - aplica functia f (unara) pe toate elementele liste L
 ; Obs! - daca functia f nu este unara (primeste mai multe argumente)
@@ -81,5 +81,6 @@
 (apply - 0 1 '(2 3)) ; intoarce -6
 ; 0 este acumulatorul initial
 ; aplica scadere intre acumulator si elementul curent pe 1, 2, 3
+; 0 - 1 - 2 - 3
 
 
