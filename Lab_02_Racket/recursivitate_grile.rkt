@@ -1,9 +1,9 @@
 #lang racket/gui
 
 ; 1. Pentru definitia Racket de mai jos, ce adancime maxima atinge stiva
-; in timpul evaluarii expresiei (f 5)?
+; in timpul evaluarii expresiei (f1 5)?
 ; Obs: daca functia ar fi recursiva pe coada, toate apelurile lui
-; f s-ar afla la adancime 0, datorita tail-call optimization.
+; f1 s-ar afla la adancime 0, datorita tail-call optimization.
 (define (f1 x)
   (cond [(< x 0) x]
         [(odd? x) (f1 (- x 1))]
@@ -20,14 +20,12 @@
 (define (f31 a b)
   (if (zero? a)
       b
-      (let ((newb (+ 1 b)))
-        (f31 (- a 1) newb))))
+      (f31 (- a 1) (+ 1 b))))
 
 (define (f32 a b)
   (if (zero? a)
       b
-      (let ((newf (f32 (- a 1) b)))
-        (+ 1 newf))))
+      (+ 1 (f32 (- a 1) b))))
 
 
 ; 4. Cum arata procesul generat de apelul (par? 10) in Racket?
