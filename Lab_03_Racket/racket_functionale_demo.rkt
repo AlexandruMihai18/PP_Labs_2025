@@ -66,7 +66,7 @@
 ; Obs! - asemenator lui map poate primi mai multe liste, dar functia f trebuie
 ; sa primeasca 1 (acumulatorul) + nr liste oferite argumente 
 (foldl cons null '(1 2 3 4)) ; reverse
-(foldl (lambda (x y result) (* result (+ x y))) 1 '(1 3 5) '(2 4 6))
+(foldl (lambda (x y result) (* result (+ x y))) 1 '(1 3) '(2 4))
 
 ; FOLDR - (foldr f init L) - f functie binara
 ; similar foldl doar ca se porneste cu ultimul element

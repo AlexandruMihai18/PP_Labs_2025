@@ -81,5 +81,6 @@
 (apply - 0 1 '(2 3)) ; intoarce -6
 ; 0 este acumulatorul initial
 ; aplica scadere intre acumulator si elementul curent pe 1, 2, 3
+; 0 - 1 - 2 - 3
 
 
