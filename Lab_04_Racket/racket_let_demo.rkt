@@ -10,7 +10,7 @@
 ; Legare DINAMICA - define
 
 ; Sintaxa let, let*, letrec
-; (let ((id1 val1) (id2 val2) ...)
+; (let [(id1 val1) (id2 val2) ...]
 ;      ( expresii cu id1, id2, ...))
 
 ; LET - domeniul de vizibilitate in corpul functiilor care urmeaza
@@ -18,12 +18,13 @@
 
 (define a 10)
 
-(let ((a 1) (b (+ a 1))) ; b nu este influentat de legarea lui a la 1
+(let [(a 1)
+      (b (+ a 1))] ; b nu este influentat de legarea lui a la 1
   (cons a b))
 
-(let ((x 1))
-  (let ((f (lambda () (print x))))
-    (let ((x 2))
+(let [(x 1)]
+  (let [(f (lambda () (print x)))]
+    (let [(x 2)]
       (f))))
 
 (display "\n")
@@ -33,6 +34,13 @@
 
 (let* ((a 1) (b (+ a 1)))
   (cons a b))
+
+(let* [(x 1)]
+  (let* [(f (lambda () (print x)))]
+    (let* [(x 2)]
+      (f))))
+
+(display "\n")
 
 ; LETREC - domeniul de vizibilitate in corpul functiilor care urmeaza
 ; (incluzand legarile care au existat si care urmeaza in letrec)
@@ -44,7 +52,7 @@
 ; eroare - nu se cunoaste valoarea lui v la momentul definirii lui u
 
 (letrec
-    ((even-length?
+    [(even-length?
       (lambda (L)
         (if (null? L)
             #t
@@ -53,7 +61,7 @@
       (lambda (L)
         (if (null? L)
             #f
-            (even-length? (cdr L))))))
+            (even-length? (cdr L)))))]
   (even-length? '(1 2 3 4 5 6)))
 
 ; NAMED LET - mod de a itera in interiorul unei functii
@@ -61,7 +69,7 @@
 ;      (expresii cu id1, id2, ... implementat recursiv utilizand functia auxiliara))
 
 (define (interval a b step)
-  (let iter ((b b) (result '()))
+  (let iter [(b b) (result '())]
     (if (> a b)
         result
         (iter (- b step) (cons b result)))))
