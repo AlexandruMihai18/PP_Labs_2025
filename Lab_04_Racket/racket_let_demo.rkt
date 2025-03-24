@@ -46,8 +46,8 @@
 ; (incluzand legarile care au existat si care urmeaza in letrec)
 ; - util pentru apeluri recursive imbricate
 
-;(letrec ((u v) (v 1))
-; (cons u v))
+; (letrec ((u v) (v 1))
+;  (cons u v))
 
 ; eroare - nu se cunoaste valoarea lui v la momentul definirii lui u
 

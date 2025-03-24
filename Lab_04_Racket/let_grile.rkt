@@ -8,8 +8,8 @@
 ; Variante
 
 ; a)
-; ((lambda (x)
-;    ((lambda (y) y))) (lambda () (+ x 1)) 10)
+((lambda (x)
+     ((lambda (y) (y))) (lambda () (+ x 1))) 10)
 
 ; b)
 ; ((lambda (x)

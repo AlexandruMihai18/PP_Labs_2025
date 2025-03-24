@@ -18,7 +18,8 @@
 
 (define a 10)
 
-(let [(a 1) (b (+ a 1))] ; b nu este influentat de legarea lui a la 1
+(let [(a 1)
+      (b (+ a 1))] ; b nu este influentat de legarea lui a la 1
   (cons a b))
 
 (let [(x 1)]
