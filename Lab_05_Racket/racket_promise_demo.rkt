@@ -11,7 +11,7 @@
 ; - specific limbajului Haskell
 ; - exista mecanisme prin care se poate intarzia evaluarea unei expresii
 
-; 1. Evaluare lenesa folosind inchideri
+; 1. Evaluare lenesa folosind inchideri functionale
 (define sum1
   (lambda (x y)
     (lambda ()
@@ -44,10 +44,10 @@
   (stream-cons 1 ones-stream))
 
 (define (stream-take s n)
-  (cond ((zero? n) '())
-        ((stream-empty? s) '())
-        (else (cons (stream-first s)
-                    (stream-take (stream-rest s) (- n 1))))))
+  (cond [(zero? n) '()]
+        [(stream-empty? s) '()]
+        [else (cons (stream-first s)
+                    (stream-take (stream-rest s) (- n 1)))]))
 
 (stream-take ones-stream 5)
 
@@ -69,4 +69,16 @@
 
 (stream-take fibo1-stream 10)
 
-; o implementare utilizand stream-map pentru mai multe streamuri -> laborator
+; Cum facem primes-stream?
+
+(define sieve
+  (lambda (s)
+    (let [(divisor (stream-first s))]
+      (stream-cons divisor
+                 (sieve (stream-filter (λ(n) (< 0 (modulo n divisor))) (stream-rest s)))))))
+
+(define primes-stream
+  (sieve
+   (stream-rest (stream-rest naturals-stream))))
+
+(stream-take primes-stream 5)

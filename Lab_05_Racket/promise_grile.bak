@@ -34,6 +34,7 @@
 
 
 
+
 ; Ex. 1
 ; R: O singura data -> streamuri -- lazy evaluation
 ; '(stream-first ((calcul 0) (calcul 1)))
