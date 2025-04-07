@@ -48,6 +48,8 @@ data PointT = PointC
 -- px (PointC x _) = x
 -- py (PointC _ y) = y
 
+newPoint = PointC 2.0 3.0
+
 maybeReverse1 (PointC x y) shouldReverse
     | shouldReverse = PointC y x
     | otherwise = PointC x y

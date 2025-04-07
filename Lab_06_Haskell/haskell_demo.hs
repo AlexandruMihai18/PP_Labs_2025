@@ -1,4 +1,5 @@
 square x = x * x
+cube x = x * x * x
 
 -- FUNCTII INTRO
 
@@ -55,7 +56,6 @@ factorial_case x = case x < 1 of
 factorial_pattern_matching 0 = 1
 factorial_pattern_matching x = x * factorial_pattern_matching (x - 1)
 
-
 -- FUNCTII UZUALE
 
 -- map f l1 -> l2
@@ -74,7 +74,7 @@ r4 = foldr (\x acc -> x * acc) 1 [1, 2 .. 5]
 r5 = zip [1, 3 .. 10] [2, 4 .. 10]
 
 -- zipWith f l1 l2 -> list of results
-r6 = zipWith (\x y -> (x, y)) [1, 3 .. 10] [2, 4 .. 10]
+r6 = zipWith (\x y -> x * y) [1, 3 .. 10] [2, 4 .. 10]
 
 -- DOMENII DE VIZIBILITATE - let / where
 

@@ -37,7 +37,10 @@ inc x = x + 1
 
 f1 x = inc (square x)
 f2 x = inc $ square x
-f3 x = inc . square $ x
+f3 x = inc . square $ x -- f3 x = inc . square (x)
 f4 = inc . square
 
 sum1 l1 = foldl (+) 0 l1
+
+flip foldr [1, 2, 3] 0 (+)
+foldr (+) 0 [1, 2, 3]

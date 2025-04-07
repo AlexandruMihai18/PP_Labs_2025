@@ -102,7 +102,7 @@ instance Eq a => Eq (BST a) where
 
 -- Cum implementam functionale pentru tipurile noi create?
 
--- 1. Creeam functii noi
+-- 1. Cream functii noi
 
 treeMap :: (a -> b) -> BST a -> BST b
 
