@@ -7,9 +7,19 @@ f1 = \x y -> x + y -- echivalent cu lambda (x y) (+ x y) in Racket
 
 f2 x y = x + y
 
+f3 = (2 +)
+f4 = (+ 2)
+f5 = (- 2)
+f5' = (`subtract` 2)
+f6 = (2 -)
+
+-- Obs: operatorii in Haskell sunt scrisi in forma infixata
+-- 2 + 3 == (+) 2 3
+-- elem 2 [1, 2, 3] == 2 `elem` [1, 2, 3]
+
 -- TIPURI DE BAZA
 
--- 5 :: Int
+-- 5 :: Int (Num -- Numeric)
 -- 'H' :: Char
 -- "Hello" :: String / [Char] / Char array
 -- True/False :: Bool
@@ -37,6 +47,13 @@ pair = (3, "Ana")
 -- fst -- first element
 -- snd -- second element
 
+-- Typed Hole - Haskell permite posibilitatea determinarii tipului
+-- de date al unei expresii incomplete
+
+-- not $ fst (_, 2)
+
+-- Vom detalia in laboratorul urmator motivul utilizarii $ in expresia de mai sus
+
 -- DEFINIREA FUNCTIILOR
 
 -- if - then - else
@@ -55,6 +72,18 @@ factorial_case x = case x < 1 of
 -- pattern matching
 factorial_pattern_matching 0 = 1
 factorial_pattern_matching x = x * factorial_pattern_matching (x - 1)
+
+-- CURRY vs UNCURRY
+
+-- Functiile in Haskell sunt curried by default
+-- :t f2 -- f2 :: Num a => a -> a -> a
+-- :t f2 1 -- f2 1 :: Num a => a -> a
+-- :t f2 1 2 -- f2 1 2 :: Num a => a
+
+-- Pentru a le converti in variante uncurried se foloseste functia uncurry
+-- :t uncurry f2 -- uncurry f2 :: Num a => (a, a) -> a
+
+f2_uncurry = uncurry f2
 
 -- FUNCTII UZUALE
 
@@ -81,7 +110,7 @@ r6 = zipWith (\x y -> x * y) [1, 3 .. 10] [2, 4 .. 10]
 -- LET - letrec din Racket
 
 pair1 = 
-    let x = y + 1
+    let x = y + 1 -- datorita evaluarii lenese, x este evaluat la 3 in momentul utilizarii
         y = 2
         f n = if n == 0 then [] else n : f (n - 1)
     in (x + y, f 2)
