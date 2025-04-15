@@ -10,7 +10,7 @@ f2 x y = x + y
 f3 = (2 +)
 f4 = (+ 2)
 f5 = (- 2)
-f5' = (`subtract` 2)
+f5' = (subtract 2)
 f6 = (2 -)
 
 -- Obs: operatorii in Haskell sunt scrisi in forma infixata

@@ -4,20 +4,27 @@
 	cadrul evaluarii expresiei:
 
 	head $ filter even $ map (^ 2) [1 .. 4]?
+	head (filter even (map (^ 2) [1 .. 4]))
 
 -}
 
 {-
-	2. De cate ori se calculeaza corpul functiei f la evaluarea expresiei:
+	2. De cate ori se calculeaza corpul functiei f1 la evaluarea expresiei:
 	
-	length [a 2, a 2, a, b, b]?
+	length [a 2, a 2, a 2, b, b]?
 -}
 
 f1 x y = x + y
 a = f1 1
 b = f1 2 3
-length [] = 0
-length (_:xs) = 1 + length xs
+length1 [] = 0
+length1 (hd : tl) = 1 + length1 tl
+
+-- length [a 2, a 2, a 2, b, b]
+-- 1 + length [a 2, a 2, b, b]
+-- 1 + 1 + length [a 2, b, b]
+-- 1 + 1 + 1 + 1 + 1 + 0
+-- 5
 
 {-
 	3. Cate elemente ale listei xs vor fi calculate cand
@@ -28,6 +35,10 @@ length (_:xs) = 1 + length xs
 
 xs = map (+ 1) [1 .. 10]
 f2 (8:9:_) = True
+f2 _ = False
+
+-- f2 hd : tl
+-- f2 2 : tl
 
 {-
 	4. Pentru programul Haskell de mai jos
