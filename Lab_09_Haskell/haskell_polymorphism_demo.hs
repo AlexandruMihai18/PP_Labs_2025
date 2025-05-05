@@ -23,6 +23,14 @@ l2 = [1.1, 2.2, 3.3, 4.4, 5.5]
 -- elem :: Eq a => a -> [a] -> Bool
 
 
+-- Exemplu cum distingem intre polimorfism parametric si ad-hoc
+
+-- length :: Foldable t => t a -> Int
+
+-- Prezinta:
+--  1) Polimorfism parametric in a (nu ne intereseaza tipul de date din structura respectiva)
+--  2) Polimorfism ad-hoc in variabila de tip t (in functie de 'container' - lista, BST, tuplu - implementarea este diferita)
+
 -- CLASE IN HASKELL
 -- similar cu interfetele in Java
 -- tipurile de date nou create vor implementa functiile oferite de clase
@@ -91,6 +99,12 @@ instance Eq a => Eq (BST a) where
 
 -- ofera instantiere standard pentru o clasa (pentru Eq asemanator cu ce am facut mai sus)
 
+
+data Anotherperson = Anotherperson 
+    {
+        anothername :: String,
+        anothercnp :: Integer
+    } deriving (Eq, Show)
 
 -- NUM
 
