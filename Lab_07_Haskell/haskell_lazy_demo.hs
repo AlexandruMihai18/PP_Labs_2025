@@ -39,7 +39,7 @@ length1 = length $ 3 : [1, 2] -- echivalent cu length1 = length (3 : [1, 2])
 square x = x * x
 inc x = x + 1
 
-f1 x = inc (square x)
+f1 x = inc (square x) -- x ** 2 + 1
 f2 x = inc $ square x
 f3 x = inc . square $ x -- f3 x = inc . square (x)
 f4 = inc . square
