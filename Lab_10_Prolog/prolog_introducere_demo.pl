@@ -2,7 +2,7 @@
 
 % SINTAXA SI SEMANTICA
 
-% Programele scrise in Prolog descriu relatii exprimate prin clauza
+% Programele scrise in Prolog descriu relatii exprimate prin clauze
 
 % 2 tipuri de clauze:
 %   1. Axiome (facts)
@@ -30,6 +30,7 @@ cel_mai_bun_prieten(cerberus, hades).
 % rege(?Nume, ?Regiune, ?Aliat)
 
 rege(rhesus, tracia, troia).
+rege(rhesus, tracia, patagonia).
 
 % in consola rulam urmatoarele interogari
 % caine(cerberus).
@@ -76,8 +77,8 @@ viu(hunabku).
 
 zeu(zeus).
 
-% muritor(leulDinNemeea).
-% muritor(rhesus).
+muritor(leulDinNemeea).
+muritor(rhesus).
 muritor(X) :- om(X).
 muritor(X) :- viu(X), \+ zeu(X).
 
@@ -99,15 +100,14 @@ muritor(X) :- viu(X), \+ zeu(X).
 
 % Relationali aritmetici: =\=, <, >, =<, >=, =:=, is
 
-% De control: , (si), ; (sau), \+ (negatie)
+% De control: `,` (si), `;` (sau), `\+` (negatie)
 
 % Tipuri diferite de egalitate
-% = : unificare, legare astfel inca variabilele sa se unifice
+% = : unificare, legare astfel inca variabilele sa se fie 'identice' de o parte si de alta a operatorului
 % \= : adevarat cand cei 2 operanzi NU se pot unifica
-% == : verifica daca cei 2 operanzi sunt acelasi lucru (sunt necesare legari anterioare cu =)
+% == : verifica daca cei 2 operanzi sunt acelasi lucru (sunt necesare legari anterioare cu =) -- trebuie instantiate
 % \== : \+ T1 == T2
-% is : echivalent cu =:= (egalitate aritmetica) daca p. stanga si p. dreapta sunt ambele legate, 
-%       altfel incearca sa lege partea stanga la partea dreapta
+% is : produce legare la stanga, trebuie ca p. dreapta sa fie complet instantiata (legata)
 % =:= : operator aritmetic, ambii operanzi trebuie sa fie complet instantiati (legati)
 % =\= : \+ T1 =:= T2
 
@@ -142,3 +142,10 @@ muritor(X) :- viu(X), \+ zeu(X).
 
 % 2. Siruri
 % X = "abc", string(X), writeln(X).
+
+empty([]).
+empty([H|T]) :- false.
+
+% my_length(+List, -Length)
+my_length([], 0).
+my_length([H|T], N) :- my_length(T, M), N is M + 1. 

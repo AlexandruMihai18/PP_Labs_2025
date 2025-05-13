@@ -95,7 +95,7 @@ subset_sum2([Head | Rest], Sum) :-
 % findall(+Template, +Goal, -Bag)
 even(Numbers, Even) :-
     findall(X,
-            (member(X, Numers), X mod 2 =:= 0),
+            (member(X, Numbers), X mod 2 =:= 0),
             Even).
 
 % even([1,2,3,4,5,6,7,8,9], Even).

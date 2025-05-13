@@ -11,11 +11,11 @@ swipl name.pl
 * Incarcare modificari
 
 ```
-:- make.
+?- make.
 ```
 
 * Activare suport diacritice
 
 ```
-:- set_prolog_flag(encoding,utf8).
+?- set_prolog_flag(encoding,utf8).
 ```
