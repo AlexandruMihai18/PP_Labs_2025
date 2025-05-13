@@ -19,3 +19,16 @@ swipl name.pl
 ```
 ?- set_prolog_flag(encoding,utf8).
 ```
+
+* Observare flow executie
+
+```
+?- trace.
+?- notrace. % remove trace
+?- nodebug. % remove debug
+```
+
+* Iesire din consola
+```
+?- halt.
+```
